@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/home.css">
+    </head>
+    <body>
+        <h1 id="page-heading">
+            <i class="fas fa-tasks"></i> TODO App
+        </h1>
+        <form id="task-input" action="/create-task" method="POST">
+            <label for="description">DESCRIPTION</label><br>
+            <input type="text" name="description" id="description" placeholder="What do you need to do?" required>
+            <div class="horizontal-divider"></div>
+            <label for="category">CATEGORY</label><br>
+            <select name="category" id="category">
+                <option value="" selected>Choose a category</option>
+                <option value="personal">Personal</option>
+                <option value="work">Work</option>
+                <option value="school">School</option>
+                <option value="cleaning">Cleaning</option>
+                <option value="other">Other</option>
+            </select>
+            <div class="horizontal-divider"></div>
+            <label for="date">DUE DATE</label><br>
+            <input type="date" name="date" id="date" required><br>
+            <div class="horizontal-divider"></div>
+            <button type="submit" id="add-btn"> <i class="fas fa-plus"></i> ADD TASK</button>
+        </form>
+        <form method="POST" action="/deletetask" id="delete-form">
+            <button type="submit" id="delete-btn"> <i class="fas fa-trash"></i> DELETE TASKS</button>
+            <div id="task-list-container">
+                <% for (let i of task_list){%>
+                    <div class="horizontal-divider"></div>
+                    <div class="task">
+                        <div class="checkbox">
+                            <input type="checkbox" name="<%=i._id%>"><%= i.task %>
+                        </div>
+                        <div class="category"><span><%= i.category %></span></div>
+                        <p> <i class="fas fa-calendar-alt"></i> <%= i.date %></p>
+                    </div>
+                <%}%>
+            </div>
+        </form>
+        <script type="text/javascript" src="/js/home.js"></script>
+    </body>
+</html>
